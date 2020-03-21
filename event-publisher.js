@@ -291,6 +291,7 @@ function EventPublisher(MqttHandler) {
                 MqttHandler.publish('washerFluidLevel', data.washerFluidLevel);
                 MqttHandler.publish('carLocked', data.carLocked);
                 MqttHandler.publish('engineRunning', data.engineRunning);
+                MqttHandler.publish('odometer', data.odometer);
 
 
                 if (data.calculatedPosition && data.calculatedPosition.longitude) {
@@ -342,7 +343,11 @@ function EventPublisher(MqttHandler) {
                 }
 
                 // more stuff here
-
+                if(data.hvBattery){
+                    MqttHandler.publish('battery/level', data.hvBattery.hvBatteryLevel);
+                    MqttHandler.publish('battery/distanceToEmpty', data.hvBattery.distanceToHVBatteryEmpty);
+                    MqttHandler.publish('battery/chargeStatus', data.hvBattery.hvBatteryChargeStatus);
+                }
 
 
 
